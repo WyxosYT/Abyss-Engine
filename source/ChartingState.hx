@@ -521,6 +521,7 @@ class ChartingState extends MusicBeatState
 		FlxG.watch.addQuick('daBeat', curBeat);
 		FlxG.watch.addQuick('daStep', curStep);
 
+		#if desktop
 		if (FlxG.mouse.justPressed)
 		{
 			if (FlxG.mouse.overlaps(curRenderedNotes))
@@ -565,6 +566,55 @@ class ChartingState extends MusicBeatState
 			else
 				dummyArrow.y = Math.floor(FlxG.mouse.y / GRID_SIZE) * GRID_SIZE;
 		}
+		#end
+		#if android
+		for (touch in FlxG.touches.list){
+			if (touch.justReleased)
+			{
+				if (touch.overlaps(curRenderedNotes))
+				{
+					curRenderedNotes.forEach(function(note:Note)
+					{
+						if (touch.overlaps(note))
+						{ // FlxG.keys.pressed.CONTROL maybe fix later...
+							if (false)
+							{
+								selectNote(note);
+							}
+							else
+							{
+								trace('tryin to delete note...');
+								deleteNote(note);
+							}
+						}
+					});
+				}
+				else
+				{
+					if (touch.x > gridBG.x
+						&& touch.x < gridBG.x + gridBG.width
+						&& touch.y > gridBG.y
+						&& touch.y < gridBG.y + (GRID_SIZE * _song.notes[curSection].lengthInSteps))
+					{
+						FlxG.log.add('added note');
+						addNote(touch.x);
+					}
+				}
+			}
+
+			if (touch.x > gridBG.x
+				&& touch.x < gridBG.x + gridBG.width
+				&& touch.y > gridBG.y
+				&& touch.y < gridBG.y + (GRID_SIZE * _song.notes[curSection].lengthInSteps))
+			{
+				dummyArrow.x = Math.floor(touch.x / GRID_SIZE) * GRID_SIZE;
+				if (key_shift.pressed) //FlxG.keys.pressed.SHIFT
+					dummyArrow.y = touch.y;
+				else
+					dummyArrow.y = Math.floor(touch.y / GRID_SIZE) * GRID_SIZE;
+			}
+		}
+		#end
 
 		if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end)
 		{
@@ -966,7 +1016,7 @@ class ChartingState extends MusicBeatState
 		updateGrid();
 	}
 
-	private function addNote():Void
+	private function addNote(mousex):Void
 	{
 		var noteStrum = getStrumTime(dummyArrow.y) + sectionStartTime();
 		var noteData = Math.floor(FlxG.mouse.x / GRID_SIZE);
