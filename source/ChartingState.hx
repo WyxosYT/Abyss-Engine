@@ -1070,6 +1070,10 @@ class ChartingState extends MusicBeatState
 
 		var data:String = Json.stringify(json);
 
+		#if android
+		openfl.system.System.setClipboard(data.trim());
+		#end
+
 		if ((data != null) && (data.length > 0))
 		{
 			_file = new FileReference();
