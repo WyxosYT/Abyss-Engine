@@ -1016,7 +1016,12 @@ class ChartingState extends MusicBeatState
 		updateGrid();
 	}
 
-	private function addNote(mousex):Void
+	#if desktop
+	private function addNote():Void
+	#end
+	#if android
+	private function addNote(mouseX):Void
+	#end
 	{
 		var noteStrum = getStrumTime(dummyArrow.y) + sectionStartTime();
 		var noteData = Math.floor(FlxG.mouse.x / GRID_SIZE);
