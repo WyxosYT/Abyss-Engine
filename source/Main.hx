@@ -89,6 +89,12 @@ class Main extends Sprite
 			data.abyss.data.isgtapping = true;
 		}
 
+		#if android
+		if (data.abyss.data.ispausebutton == null){
+			data.abyss.data.ispausebutton = true;
+		}
+		#end
+
 		// customization
 		if (data.abyss.data.isfnflogo == null){
 			data.abyss.data.isfnflogo = false;

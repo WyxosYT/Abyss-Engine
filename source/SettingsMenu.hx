@@ -47,6 +47,13 @@ class SettingsMenu extends MusicBeatState
 	var gtTrue:FlxButton;
 	var gtFalse:FlxButton;
 
+	#if android
+	var pauseBG:FlxSprite;
+	var pauseTxt:FlxText;
+	var pauseTrue:FlxButton;
+	var pauseFalse:FlxButton;
+	#end
+
 	var logoBG:FlxSprite;
 	var logoTxt:FlxText;
 	var logoFNF:FlxButton;
@@ -166,7 +173,6 @@ class SettingsMenu extends MusicBeatState
 		add(openKB);
 
 		gtappingBG = new FlxSprite(0, 220).makeGraphic(100, 50);
-		//gtappingBG.loadGraphic(Paths.image('menu/settings/gtappingBG', 'shared'));
 		gtappingBG.setGraphicSize(Std.int(gtappingBG.width * 2));
 		gtappingBG.screenCenter(X);
 		gtappingBG.color = FlxColor.BLACK;
@@ -195,6 +201,38 @@ class SettingsMenu extends MusicBeatState
 		gtFalse.x += 620;
 		//gtFalse.screenCenter(X);
 		add(gtFalse);
+
+		#if android
+		pauseBG = new FlxSprite(0, 320).makeGraphic(100, 50);
+		pauseBG.setGraphicSize(Std.int(pauseBG.width * 2));
+		pauseBG.screenCenter(X);
+		pauseBG.color = FlxColor.BLACK;
+		pauseBG.alpha = 0.7;
+		add(pauseBG);
+
+		pauseTxt = new FlxText(0, 300, "Pause Button");
+		pauseTxt.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		pauseTxt.screenCenter(X);
+		add(pauseTxt);
+
+		pauseTrue = new FlxButton(0, 40, "True", function()
+		{
+			data.abyss.data.ispausebutton = true;
+		});
+		pauseTrue.y += 300;
+		pauseTrue.x += 620;
+		//pauseTrue.screenCenter(X);
+		add(pauseTrue);
+
+		pauseFalse = new FlxButton(0, 40, "False", function()
+		{
+			data.abyss.data.ispausebutton = false;
+		});
+		pauseFalse.y += 320;
+		pauseFalse.x += 620;
+		//pauseFalse.screenCenter(X);
+		add(pauseFalse);
+		#end
 
 		logoBG = new FlxSprite(0, 120).makeGraphic(100, 50);
 		logoBG.setGraphicSize(Std.int(logoBG.width * 2));
@@ -547,6 +585,19 @@ class SettingsMenu extends MusicBeatState
 			gtTrue.color = FlxColor.WHITE;
 		}
 
+		#if android
+		if (data.abyss.data.ispausebutton)
+		{
+			pauseTrue.color = FlxColor.LIME;
+			pauseFalse.color = FlxColor.WHITE;
+		}
+		else
+		{
+			pauseFalse.color = FlxColor.LIME;
+			pauseTrue.color = FlxColor.WHITE;
+		}
+		#end
+
 		if (data.abyss.data.isfnflogo)
 		{
 			logoFNF.color = FlxColor.LIME;
@@ -684,6 +735,12 @@ class SettingsMenu extends MusicBeatState
 			add(gtappingTxt);
 			add(gtTrue);
 			add(gtFalse);
+			#if android
+			add(pauseBG);
+			add(pauseTxt);
+			add(pauseTrue);
+			add(pauseFalse);
+			#end
 			remove(logoBG);
 			remove(logoTxt);
 			remove(logoFNF);
@@ -763,6 +820,12 @@ class SettingsMenu extends MusicBeatState
 			remove(gtappingTxt);
 			remove(gtTrue);
 			remove(gtFalse);
+			#if android
+			remove(pauseBG);
+			remove(pauseTxt);
+			remove(pauseTrue);
+			remove(pauseFalse);
+			#end
 			remove(musicBG);
 			remove(musicTxt);
 			remove(freakyMusic);
@@ -802,6 +865,12 @@ class SettingsMenu extends MusicBeatState
 			remove(gtappingTxt);
 			remove(gtTrue);
 			remove(gtFalse);
+			#if android
+			remove(pauseBG);
+			remove(pauseTxt);
+			remove(pauseTrue);
+			remove(pauseFalse);
+			#end
 			remove(logoBG);
 			remove(logoTxt);
 			remove(logoFNF);

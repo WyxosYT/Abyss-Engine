@@ -20,6 +20,12 @@ class Data{
 			abyss.data.isgtapping = true;
 		}
 
+		#if android
+		if (abyss.data.ispausebutton == null){
+			abyss.data.ispausebutton = true;
+		}
+		#end
+
 		// customization
 		if (abyss.data.isfnflogo == null){
 			abyss.data.isfnflogo = false;

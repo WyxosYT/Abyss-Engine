@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Abyss Engine" file="Abyss" packageName="com.wyxos.abyss" package="com.wyxos.abyss" main="Main" version="0.1" company="Wyxos" />
+	<app title="Abyss Engine" file="Abyss" packageName="com.wyxos.abyss" package="com.wyxos.abyss" main="Main" version="0.1" company="wyxos" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />

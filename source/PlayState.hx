@@ -838,7 +838,14 @@ class PlayState extends MusicBeatState
 
 		add(mcontrols);
 
-		addVirtualPad(NONE, B);
+		if (data.abyss.data.ispausebutton)
+		{
+			addVirtualPad(NONE, pause_B);
+		}
+		else
+		{
+			addVirtualPad(NONE, NONE);
+		}
 		_virtualpad.cameras = [camcontrol];
 		#end
 
