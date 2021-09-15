@@ -105,6 +105,8 @@ class FreeplayState extends MusicBeatState
 		if (StoryMenuState.weekUnlocked[6] || isDebug)
 			addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
 
+		addWeek(['CoconutMalled'], 0, ['dad']);
+
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu/weebBG', 'shared'));
 		bg.setGraphicSize(Std.int(bg.width * 6));
 		bg.screenCenter();

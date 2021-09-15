@@ -578,6 +578,39 @@ class PlayState extends MusicBeatState
 		                            add(waveSprite);
 		                            add(waveSpriteFG);
 		                    */
+
+				  }
+				  case 'coconutmalled':
+				  {
+					curStage = 'malled';
+
+					defaultCamZoom = 0.80;
+
+					var bg:FlxSprite = new FlxSprite(-1000, -500).loadGraphic(Paths.image('christmas/bgWalls','week5'));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.2, 0.2);
+					bg.active = false;
+					bg.setGraphicSize(Std.int(bg.width * 0.8));
+					bg.updateHitbox();
+					add(bg);
+
+					var bgEscalator:FlxSprite = new FlxSprite(-1100, -600).loadGraphic(Paths.image('christmas/bgEscalator','week5'));
+					bgEscalator.antialiasing = true;
+					bgEscalator.scrollFactor.set(0.3, 0.3);
+					bgEscalator.active = false;
+					bgEscalator.setGraphicSize(Std.int(bgEscalator.width * 0.9));
+					bgEscalator.updateHitbox();
+					add(bgEscalator);
+
+					var tree:FlxSprite = new FlxSprite(370, -250).loadGraphic(Paths.image('christmas/christmasTree','week5'));
+					tree.antialiasing = true;
+					tree.scrollFactor.set(0.40, 0.40);
+					add(tree);
+
+					var fgSnow:FlxSprite = new FlxSprite(-600, 700).loadGraphic(Paths.image('christmas/fgSnow','week5'));
+					fgSnow.active = false;
+					fgSnow.antialiasing = true;
+					add(fgSnow);
 		          }
 		          default:
 		          {
@@ -1498,6 +1531,10 @@ class PlayState extends MusicBeatState
 		scoreTxt.text = Ratings.calculateRanking();
 
 		songAcc = Math.max(0, totalNotesHit / totalPlayed * 100);
+		if (Math.isNaN(songAcc)) 
+		{ 
+			songAcc = 0; 
+		}
 		barAcc = songAcc;
 
 		if (songAcc >= 100)
