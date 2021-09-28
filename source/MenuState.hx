@@ -77,13 +77,14 @@ class MenuState extends MusicBeatState
 		}
 		if (data.abyss.data.isabysslogo)
 		{
-			logoBl = new FlxSprite().loadGraphic(Paths.image('abyssLogo'));
-			logoBl.setGraphicSize(Std.int(logoBl.width * 0.5));
+			logoBl = new FlxSprite(-150, -100);
+			logoBl.frames = Paths.getSparrowAtlas('abyssLogo');
 			logoBl.antialiasing = true;
+			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+			logoBl.animation.play('bump');
 			logoBl.updateHitbox();
-			logoBl.screenCenter(X);
+			// logoBl.screenCenter();
 			// logoBl.color = FlxColor.BLACK;
-			add(logoBl);
 		}
 		if (data.abyss.data.iszombieslogo)
 		{
